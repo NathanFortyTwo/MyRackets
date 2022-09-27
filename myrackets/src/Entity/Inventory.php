@@ -29,6 +29,11 @@ class Inventory
      */
     private $description;
 
+    /**
+     * @ORM\OneToOne(targetEntity=TennisMan::class, mappedBy="Inventory", cascade={"persist", "remove"})
+     */
+    private $tennisMan;
+
     public function __construct()
     {
         $this->rackets = new ArrayCollection();
@@ -77,6 +82,28 @@ class Inventory
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTennisMan(): ?TennisMan
+    {
+        return $this->tennisMan;
+    }
+
+    public function setTennisMan(?TennisMan $tennisMan): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($tennisMan === null && $this->tennisMan !== null) {
+            $this->tennisMan->setInventory(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($tennisMan !== null && $tennisMan->getInventory() !== $this) {
+            $tennisMan->setInventory($this);
+        }
+
+        $this->tennisMan = $tennisMan;
 
         return $this;
     }
