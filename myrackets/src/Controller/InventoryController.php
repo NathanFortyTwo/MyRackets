@@ -6,11 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Inventory;
 
 class InventoryController extends AbstractController
 {
     /**
-     * @Route("/inventory", name="app_inventory")
+     * @Route("/", name="app_inventory")
      */
     public function indexAction()
     {
@@ -36,7 +37,7 @@ class InventoryController extends AbstractController
     /**
      * Show a Inventory
      * 
-     * @Route("/Inventory/{id}", name="Inventory_show", requirements={"id"="\d+"})
+     * @Route("/inventory/{id}", name="Inventory_show", requirements={"id"="\d+"})
      *    note that the id must be an integer, above
      *    
      * @param Integer $id
@@ -50,11 +51,30 @@ class InventoryController extends AbstractController
             throw $this->createNotFoundException('The Inventory does not exist');
         }
 
-        $res = '...';
-        //...
+        $res = $Inventory->getDescription();
 
-        $res .= '<p/><a href="' . $this->generateUrl('Inventory_index') . '">Back</a>';
+        $res .= '<p/><a href="' . $this->generateUrl('list_inventories') . '">Back</a>';
 
         return new Response('<html><body>' . $res . '</body></html>');
+    }
+    /**
+     * Liste les inventares
+     *
+     * @Route("/inventory", name = "list_inventories", methods="GET")
+     */
+    public function listAction(ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $inventories = $entityManager->getRepository(Inventory::class)->findAll();
+
+        dump($inventories);
+
+        $res = "Liste de vos inventaires : 
+        ";
+        foreach ($inventories as $inv) {
+
+            $res .= '<li> <a href = "/inventory/' . $inv->getId() . '">' .  $inv->getDescription() . " (" . $inv->getId() . ")" . "</a></li>";
+        }
+        return new Response('<html><body><ul>' . $res . '</ul></body></html>');
     }
 }
