@@ -19,8 +19,9 @@ class DashboardController extends AbstractDashboardController
         // redirect to some CRUD controller
         $routeBuilder = $this->get(AdminUrlGenerator::class);
 
-        //return $this->redirect($routeBuilder->setController(InventoryCrudController::class)->generateUrl());
-        return $this->redirect($routeBuilder->setController(TennisManCrudController::class)->generateUrl());
+        return $this->redirect($routeBuilder->setController(InventoryCrudController::class)->generateUrl());
+        //return $this->redirect($routeBuilder->setController(RacketCrudController::class)->generateUrl());
+        //return $this->redirect($routeBuilder->setController(TennisManCrudController::class)->generateUrl());
 
         // you can also redirect to different pages depending on the current user
         if ('jane' === $this->getUser()->getUsername()) {

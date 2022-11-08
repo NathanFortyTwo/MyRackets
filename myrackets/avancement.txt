@@ -1,0 +1,2 @@
+
+ Ajout au tableau de bord d’administration des entités actuelles : DONE

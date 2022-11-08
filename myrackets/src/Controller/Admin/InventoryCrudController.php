@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class InventoryCrudController extends AbstractCrudController
 {
+
     public static function getEntityFqcn(): string
     {
         return Inventory::class;
@@ -21,7 +22,9 @@ class InventoryCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('description'),
-            AssociationField::new('[objets]')->onlyOnDetail(),
+            AssociationField::new('rackets'),
+            AssociationField::new('tennisMan'),
+
         ];
     }
 }
