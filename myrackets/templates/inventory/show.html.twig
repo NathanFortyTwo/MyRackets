@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %} Inventory Detail {% endblock %}
+
+{% block body %} 
+
+
+Voici les raquettes de l'inventaire {{inventory}}
+{%for racket in rackets%}
+
+<li>{{racket}}</li>
+{%endfor%}
+
+
+<a href={{back_path}}> Back </a>
+
+{% endblock %}

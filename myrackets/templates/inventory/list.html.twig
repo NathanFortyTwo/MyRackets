@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventory List{% endblock %}
+{% block body%}
+<br>Voici la liste des inventaires</br>
+  {% for inventory in inventories %}
+  <li>
+    <a href = inventory/{{inventory.getId()}}>  {{inventory}}  </a>(id : {{inventory.id}})
+{% endfor %} {# todos #}
+
+{% endblock %}  

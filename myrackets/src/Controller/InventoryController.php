@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Inventory;
+use App\Entity\Racket;
 
 class InventoryController extends AbstractController
 {
@@ -23,9 +24,7 @@ class InventoryController extends AbstractController
         </head>
         <body>
             <h1>Bienvenue</h1>
-                
-        <p>Bienvenue, voici votre Inventory  !</p>
-        </body>
+            </body>
     </html>';
 
         return new Response(
@@ -37,7 +36,7 @@ class InventoryController extends AbstractController
     /**
      * Show a Inventory
      * 
-     * @Route("/inventory/{id}", name="Inventory_show", requirements={"id"="\d+"})
+     * @Route("/inventory/{id}", name="inventory_show", requirements={"id"="\d+"})
      *    note that the id must be an integer, above
      *    
      * @param Integer $id
@@ -50,12 +49,16 @@ class InventoryController extends AbstractController
         if (!$Inventory) {
             throw $this->createNotFoundException('The Inventory does not exist');
         }
-
-        $res = $Inventory->getDescription();
-
-        $res .= '<p/><a href="' . $this->generateUrl('list_inventories') . '">Back</a>';
-
-        return new Response('<html><body>' . $res . '</body></html>');
+        $rackets = $doctrine->getRepository(Racket::class)->findBy(["inventory" => $Inventory]);
+        $back_path = $this->generateUrl("list_inventories");
+        return $this->render(
+            'inventory/show.html.twig',
+            [
+                'rackets' => $rackets,
+                'inventory' => $Inventory,
+                'back_path' => $back_path,
+            ]
+        );
     }
     /**
      * Liste les inventares
@@ -66,15 +69,14 @@ class InventoryController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $inventories = $entityManager->getRepository(Inventory::class)->findAll();
-
         dump($inventories);
 
-        $res = "Liste de vos inventaires : 
-        ";
-        foreach ($inventories as $inv) {
+        return $this->render(
+            'inventory/list.html.twig',
+            [
+                'inventories' => $inventories,
+            ]
 
-            $res .= '<li> <a href = "/inventory/' . $inv->getId() . '">' .  $inv->getDescription() . " (" . $inv->getId() . ")" . "</a></li>";
-        }
-        return new Response('<html><body><ul>' . $res . '</ul></body></html>');
+        );
     }
 }
