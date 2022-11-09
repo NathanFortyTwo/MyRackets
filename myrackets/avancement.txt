@@ -1,5 +1,7 @@
 
  Ajout au tableau de bord d’administration des entités actuelles : DONE
- TODO Ajout de l’affichage des [objets] d’un [inventaire] dans le frontoffice : DONE
+ Ajout de l’affichage des [objets] d’un [inventaire] dans le frontoffice : DONE
+
+ TODO : 2 Ajout de la liste des entités liées dans la page de détails
  Remarques:  pas de /admin dans /templates alors qu'il est sensé être autogénéré par un certain *maker*
  
