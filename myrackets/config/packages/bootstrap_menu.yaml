@@ -1,0 +1,11 @@
+bootstrap_menu:
+  menus:
+    main:
+      items:
+        inventories:
+          label: 'Inventories'
+          route: 'list_inventories'
+        
+        admin:
+          label: 'Admin'
+          route: 'admin'
