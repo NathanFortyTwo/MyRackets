@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DisplayRack{% endblock %}
+
+{% block body %}
+    <h1>Create new DisplayRack</h1>
+
+    {{ include('display_rack/_form.html.twig') }}
+
+    <a href="{{ path('app_display_rack_index') }}">back to list</a>
+{% endblock %}

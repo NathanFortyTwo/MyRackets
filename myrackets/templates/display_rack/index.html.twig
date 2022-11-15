@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DisplayRack index{% endblock %}
+
+{% block body %}
+    <h1>DisplayRack index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Published</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for display_rack in display_racks %}
+            <tr>
+                <td>{{ display_rack.id }}</td>
+                <td>{{ display_rack.description }}</td>
+                <td>{{ display_rack.published ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_display_rack_show', {'id': display_rack.id}) }}">show</a>
+                    <a href="{{ path('app_display_rack_edit', {'id': display_rack.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_display_rack_new') }}">Create new</a>
+{% endblock %}

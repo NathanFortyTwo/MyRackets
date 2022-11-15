@@ -2,6 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\DisplayRack;
+use App\Entity\Inventory;
+use App\Entity\Racket;
+use App\Entity\TennisMan;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -46,6 +50,9 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Inventory', 'fas fa-list', Inventory::class);
+        yield MenuItem::linkToCrud('Racket', 'fas fa-bold', Racket::class);
+        yield MenuItem::linkToCrud('TennisMan', 'fas fa-bold', TennisMan::class);
+        yield MenuItem::linkToCrud('Galleries', 'fas fa-camera', DisplayRack::class);
     }
 }

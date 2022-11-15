@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DisplayRack{% endblock %}
+
+{% block body %}
+    <h1>DisplayRack</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ display_rack.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ display_rack.description }}</td>
+            </tr>
+            <tr>
+                <th>Published</th>
+                <td>{{ display_rack.published ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_display_rack_index') }}">back to list</a>
+
+    <a href="{{ path('app_display_rack_edit', {'id': display_rack.id}) }}">edit</a>
+
+    {{ include('display_rack/_delete_form.html.twig') }}
+{% endblock %}

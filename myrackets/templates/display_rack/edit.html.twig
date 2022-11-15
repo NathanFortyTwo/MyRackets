@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit DisplayRack{% endblock %}
+
+{% block body %}
+    <h1>Edit DisplayRack</h1>
+
+    {{ include('display_rack/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_display_rack_index') }}">back to list</a>
+
+    {{ include('display_rack/_delete_form.html.twig') }}
+{% endblock %}
