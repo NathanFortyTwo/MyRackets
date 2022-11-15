@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TennisManRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class TennisMan
      * @ORM\OneToOne(targetEntity=Inventory::class, inversedBy="tennisMan", cascade={"persist", "remove"})
      */
     private $Inventory;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DisplayRack::class, mappedBy="tennisMan")
+     */
+    private $creator;
+
+    public function __construct()
+    {
+        $this->creator = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,5 +87,35 @@ class TennisMan
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, DisplayRack>
+     */
+    public function getCreator(): Collection
+    {
+        return $this->creator;
+    }
+
+    public function addCreator(DisplayRack $creator): self
+    {
+        if (!$this->creator->contains($creator)) {
+            $this->creator[] = $creator;
+            $creator->setTennisMan($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreator(DisplayRack $creator): self
+    {
+        if ($this->creator->removeElement($creator)) {
+            // set the owning side to null (unless already changed)
+            if ($creator->getTennisMan() === $this) {
+                $creator->setTennisMan(null);
+            }
+        }
+
+        return $this;
     }
 }

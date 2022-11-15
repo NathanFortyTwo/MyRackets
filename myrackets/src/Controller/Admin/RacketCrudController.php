@@ -30,7 +30,7 @@ class RacketCrudController extends AbstractCrudController
             AssociationField::new('Category') // remplacer par le nom de l'attribut spécifique, par exemple 'bodyShape'
                 ->onlyOnDetail()
                 ->formatValue(function ($value, $entity) {
-                    return implode(', ', $entity->getCategory()->toArray()); // ici getBodyShapes()
+                    return implode(', ', $entity->getCategory()->toArray()); // ici getBodyShapes()x
                 })
 
         ];

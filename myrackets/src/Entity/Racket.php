@@ -39,9 +39,15 @@ class Racket
      */
     private $Category;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=DisplayRack::class, mappedBy="rackets")
+     */
+    private $displayRacks;
+
     public function __construct()
     {
         $this->Category = new ArrayCollection();
+        $this->displayRacks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +115,33 @@ class Racket
     public function removeCategory(RacketCategory $category): self
     {
         $this->Category->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DisplayRack>
+     */
+    public function getDisplayRacks(): Collection
+    {
+        return $this->displayRacks;
+    }
+
+    public function addDisplayRack(DisplayRack $displayRack): self
+    {
+        if (!$this->displayRacks->contains($displayRack)) {
+            $this->displayRacks[] = $displayRack;
+            $displayRack->addRacket($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDisplayRack(DisplayRack $displayRack): self
+    {
+        if ($this->displayRacks->removeElement($displayRack)) {
+            $displayRack->removeRacket($this);
+        }
 
         return $this;
     }
