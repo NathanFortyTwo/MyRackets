@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RacketRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Racket
      * @ORM\ManyToOne(targetEntity=Inventory::class, inversedBy="rackets")
      */
     private $inventory;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=RacketCategory::class, inversedBy="rackets")
+     */
+    private $Category;
+
+    public function __construct()
+    {
+        $this->Category = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,5 +87,29 @@ class Racket
     public function __toString()
     {
         return $this->description;
+    }
+
+    /**
+     * @return Collection<int, RacketCategory>
+     */
+    public function getCategory(): Collection
+    {
+        return $this->Category;
+    }
+
+    public function addCategory(RacketCategory $category): self
+    {
+        if (!$this->Category->contains($category)) {
+            $this->Category[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(RacketCategory $category): self
+    {
+        $this->Category->removeElement($category);
+
+        return $this;
     }
 }

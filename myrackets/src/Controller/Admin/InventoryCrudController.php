@@ -28,6 +28,7 @@ class InventoryCrudController extends AbstractCrudController
             AssociationField::new('rackets')->setTemplatePath('admin/fields/inventory_racket.html.twig'),
             AssociationField::new('tennisMan'),
 
+
         ];
     }
     public function configureActions(Actions $actions): Actions
