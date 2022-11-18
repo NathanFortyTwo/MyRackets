@@ -27,7 +27,7 @@ class DisplayRackCrudController extends AbstractCrudController
 
         return [
             IdField::new('id')->hideOnForm(),
-            AssociationField::new('creator'),
+            AssociationField::new('tennisMan'),
             BooleanField::new('published')
                 ->onlyOnForms()
                 ->hideWhenCreating(),
