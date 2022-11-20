@@ -44,10 +44,16 @@ class Racket
      */
     private $displayRacks;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=RacketWeightCategory::class, inversedBy="rackets")
+     */
+    private $WeightCategory;
+
     public function __construct()
     {
         $this->Category = new ArrayCollection();
         $this->displayRacks = new ArrayCollection();
+        $this->WeightCategory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -142,6 +148,30 @@ class Racket
         if ($this->displayRacks->removeElement($displayRack)) {
             $displayRack->removeRacket($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RacketWeightCategory>
+     */
+    public function getWeightCategory(): Collection
+    {
+        return $this->WeightCategory;
+    }
+
+    public function addWeightCategory(RacketWeightCategory $weightCategory): self
+    {
+        if (!$this->WeightCategory->contains($weightCategory)) {
+            $this->WeightCategory[] = $weightCategory;
+        }
+
+        return $this;
+    }
+
+    public function removeWeightCategory(RacketWeightCategory $weightCategory): self
+    {
+        $this->WeightCategory->removeElement($weightCategory);
 
         return $this;
     }

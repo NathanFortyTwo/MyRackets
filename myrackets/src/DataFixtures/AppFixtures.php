@@ -8,6 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Racket;
 use App\Entity\Inventory;
 use App\Entity\RacketCategory;
+use App\Entity\RacketWeightCategory;
 use App\Entity\TennisMan;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 
@@ -43,9 +44,16 @@ class AppFixtures extends Fixture
         $inventory->setDescription("Un inventaire du tonerre");
         $inventory->setTennisMan($tennisman);
 
-        $category = new RacketCategory();
+        $category = new RacketWeightCategory();
         $category->setLabel("Les raquettes lourdes");
         $category->setDescription("Ceci est une description");
+
+        $category2 = new RacketWeightCategory();
+        $category2->setLabel("Les raquettes TRES lourdes");
+        $category2->setDescription("Ceci est une bonne description");
+        $category2->setParent($category);
+
+
 
 
         $display_rack = new DisplayRack();
@@ -55,11 +63,12 @@ class AppFixtures extends Fixture
 
         foreach ($rackets as $racket) {
             $inventory->addRacket($racket);
-            $racket->addCategory($category);
+            $racket->addWeightCategory($category2);
             $display_rack->addRacket($racket);
         }
 
         $manager->persist($category);
+        $manager->persist($category2);
         $manager->persist($display_rack);
         $manager->persist($inventory);
         $manager->flush();
