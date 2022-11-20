@@ -39,10 +39,18 @@ class AppFixtures extends Fixture
         $tennisman->setName("Jean");
         $tennisman->setDescription("Le meilleur tennisman");
 
+        $paul = new TennisMan();
+        $paul->setName("Paul");
+        $paul->setDescription("Un mauvais tennisman");
+
 
         $inventory = new Inventory();
         $inventory->setDescription("Un inventaire du tonerre");
         $inventory->setTennisMan($tennisman);
+
+        $inventory2 = new Inventory();
+        $inventory2->setDescription("Un inventaire plutot bof");
+        $inventory2->setTennisMan($paul);
 
         $category = new RacketWeightCategory();
         $category->setLabel("Les raquettes lourdes");
@@ -52,6 +60,11 @@ class AppFixtures extends Fixture
         $category2->setLabel("Les raquettes TRES lourdes");
         $category2->setDescription("Ceci est une bonne description");
         $category2->setParent($category);
+
+        $raquette2paul = new Racket();
+        $raquette2paul->setDescription("La raquette de Paul");
+        $raquette2paul->setInventory($inventory2);
+
 
 
 
@@ -67,10 +80,12 @@ class AppFixtures extends Fixture
             $display_rack->addRacket($racket);
         }
 
+
         $manager->persist($category);
         $manager->persist($category2);
         $manager->persist($display_rack);
         $manager->persist($inventory);
+        $manager->persist($inventory2);
         $manager->flush();
     }
 }
