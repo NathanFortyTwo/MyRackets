@@ -32,7 +32,7 @@ class DisplayRackCrudController extends AbstractCrudController
                 ->onlyOnForms()
                 ->hideWhenCreating(),
             TextField::new('description'),
-            AssociationField::new('Racket')
+            AssociationField::new('rackets')
                 ->onlyOnForms()
                 // on ne souhaite pas gérer l'association entre les
                 // [objets] et la [galerie] dès la crétion de la
@@ -46,11 +46,11 @@ class DisplayRackCrudController extends AbstractCrudController
                     function (QueryBuilder $queryBuilder) {
                         // récupération de l'instance courante de [galerie]
                         $currentDisplayRack = $this->getContext()->getEntity()->getInstance();
-                        $creator = $currentDisplayRack->getCreator();
+                        $creator = $currentDisplayRack->getTennisMan();
                         $memberId = $creator->getId();
                         // charge les seuls [objets] dont le 'owner' de l'[inventaire] est le [createur] de la galerie
                         $queryBuilder->leftJoin('entity.inventory', 'i')
-                            ->leftJoin('i.owner', 'm')
+                            ->leftJoin('i.tennisMan', 'm')
                             ->andWhere('m.id = :member_id')
                             ->setParameter('member_id', $memberId);
                         return $queryBuilder;
