@@ -54,5 +54,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Racket', 'fas fa-bold', Racket::class);
         yield MenuItem::linkToCrud('TennisMan', 'fas fa-bold', TennisMan::class);
         yield MenuItem::linkToCrud('Galleries', 'fas fa-camera', DisplayRack::class);
+        yield MenuItem::linkToRoute('Back to site', 'fas fa-arrow-left', "app_inventory");
     }
 }

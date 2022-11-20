@@ -4,10 +4,8 @@
  Ajout de la liste des entités liées dans la page de détails :DONE
  Intégration de Bootstrap dans vos templates DONE
  Ajout d’une première entité [catégorie] avec gestion d’un arbre de sous-catégories DONE
+ Génération d’un nouveau contrôleur CRUD au front-office DONE
 
-
- Génération d’un nouveau contrôleur CRUD au front-office
-
- TODO : FIXTURER TOUT CA
+ Contextualisation de l’accès aux données d’un membre, et restriction des opérations permises
  
  Remarques:  pas de /admin dans /templates alors qu'il est sensé être autogénéré par un certain *maker*

@@ -5,7 +5,12 @@ bootstrap_menu:
         inventories:
           label: 'Inventories'
           route: 'list_inventories'
-        
+        Galleries:
+          label: 'Galleries'
+          route: 'app_display_rack_index'
+
         admin:
           label: 'Admin'
           route: 'admin'
+
+  

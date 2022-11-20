@@ -38,7 +38,7 @@ class DisplayRackCrudController extends AbstractCrudController
                 // [objets] et la [galerie] dès la crétion de la
                 // [galerie]
                 ->hideWhenCreating()
-                ->setTemplatePath('admin/fields/[inventaire]_[objets].html.twig')
+                ->setTemplatePath('admin/fields/inventory_racket.html.twig')
                 // Ajout possible seulement pour des [objets] qui
                 // appartiennent même propriétaire de l'[inventaire]
                 // que le [createur] de la [galerie]

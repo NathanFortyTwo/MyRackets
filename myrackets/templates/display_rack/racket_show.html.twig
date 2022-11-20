@@ -1,3 +1,35 @@
+{% extends 'base.html.twig' %}
 
-{%extends base.html.twig%}
-<a href="{{ path('app_DisplayRack_show', { 'id': DisplayRack.id}) }}">back to Display Rack</a>
+
+{%block body%}
+
+<p>Détails de la raquette :</p>
+
+<table style="width:50%">
+    <tr>
+      <th>Attribut</th>
+      <th>Valeur</th>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td>{{racket.description}}</td>
+    </tr>
+    <tr>
+        <td>Poids</td>
+        <td>{{racket.weight}}</td>
+    </tr>
+    <tr>
+        <td>Inventaire</td>
+        <td>{{racket.getInventory}}</td>
+    </tr>
+
+  </table>
+  <p></p> 
+<h5>Categories :</h5> 
+{%for c in racket.getCategory%}
+- {{c}}
+{%endfor%}
+<p></p>
+
+<a href="{{ path('app_display_rack_show', { 'id': display_rack.id}) }}">back to Display Rack</a>
+{%endblock %}
