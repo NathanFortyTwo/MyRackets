@@ -1,3 +1,5 @@
+Nathan FERET, 2022
+
 Projet étudiant dans le cadre du cours CSC4101 de Télécom SudParis
 github.com/NathanFortyTwo/MyRackets
 

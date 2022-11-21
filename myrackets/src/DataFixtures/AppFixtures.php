@@ -63,8 +63,10 @@ class AppFixtures extends Fixture
 
         $raquette2paul = new Racket();
         $raquette2paul->setDescription("La raquette de Paul");
+        $raquette2paul->setWeight(500);
         $raquette2paul->setInventory($inventory2);
 
+        $inventory2->addRacket($raquette2paul);
 
 
         $display_rack = new DisplayRack();
@@ -82,6 +84,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($category);
         $manager->persist($category2);
+        $manager->persist($raquette2paul);
         $manager->persist($display_rack);
         $manager->persist($inventory);
         $manager->persist($inventory2);
