@@ -2,10 +2,17 @@
 
 {% block title %}Inventory List{% endblock %}
 {% block body%}
-<br>Voici la liste des inventaires</br>
-  {% for inventory in inventories %}
-  <li>
-    <a href = inventory/{{inventory.getId()}}>  {{inventory}}  </a>(id : {{inventory.id}})
-{% endfor %} {# todos #}
 
+<table class="table">
+  <th>
+    Voici la liste des inventaires
+  </th>
+<tr>
+  {% for inventory in inventories %}
+  <td>
+    <a href = inventory/{{inventory.getId()}}>  {{inventory}}  </a>(id : {{inventory.id}})
+  </td>
+{% endfor %} {# todos #}
+</tr> 
+</table>
 {% endblock %}  
