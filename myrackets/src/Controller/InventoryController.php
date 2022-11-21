@@ -6,8 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\InventoryRepository;
 use App\Entity\Inventory;
 use App\Entity\Racket;
+use App\Entity\TennisMan;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\InventoryType;
 
 class InventoryController extends AbstractController
 {
@@ -63,5 +67,26 @@ class InventoryController extends AbstractController
             ]
 
         );
+    }
+    /**
+     * @Route("/new/{id}", name="app_inventory_new", methods={"GET", "POST"})
+     */
+    public function new(Request $request, InventoryRepository $inventoryRepository, TennisMan $tennisMan): Response
+    {
+        $inventory = new Inventory();
+        $inventory->setTennisMan($tennisMan);
+        $form = $this->createForm(InventoryType::class, $inventory);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $inventoryRepository->add($inventory, true);
+
+            return $this->redirectToRoute('app_inventory', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('inventory/new.html.twig', [
+            'inventory' => $inventory,
+            'form' => $form,
+        ]);
     }
 }

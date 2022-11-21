@@ -18,6 +18,14 @@
             <tr>
                 <th>Published</th>
                 <td>{{ display_rack.published ? 'Yes' : 'No' }}</td>
+            </tr> 
+            <tr>
+                <th>Rackets</th>
+                {%for racket in display_rack.rackets%}
+                <td><a href = {{path('app_display_rack_racket_show',{display_rack_id:display_rack.id,racket_id:racket.id})}} >{{ racket}}</a>
+                </td>
+                {%endfor%}
+            
             </tr>
         </tbody>
     </table>

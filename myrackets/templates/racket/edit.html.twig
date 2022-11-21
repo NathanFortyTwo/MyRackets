@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Racket{% endblock %}
+
+{% block body %}
+    <h1>Edit Racket</h1>
+
+    {{ include('racket/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_racket_index') }}">back to list</a>
+
+    {{ include('racket/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Racket{% endblock %}
+
+{% block body %}
+    <h1>Racket</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ racket.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ racket.description }}</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>{{ racket.weight }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_racket_index') }}">back to list</a>
+
+    <a href="{{ path('app_racket_edit', {'id': racket.id}) }}">edit</a>
+
+    {{ include('racket/_delete_form.html.twig') }}
+{% endblock %}

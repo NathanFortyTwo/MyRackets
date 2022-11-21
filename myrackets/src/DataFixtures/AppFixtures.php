@@ -52,11 +52,11 @@ class AppFixtures extends Fixture
         $inventory2->setDescription("Un inventaire plutot bof");
         $inventory2->setTennisMan($paul);
 
-        $category = new RacketWeightCategory();
+        $category = new RacketCategory();
         $category->setLabel("Les raquettes lourdes");
         $category->setDescription("Ceci est une description");
 
-        $category2 = new RacketWeightCategory();
+        $category2 = new RacketCategory();
         $category2->setLabel("Les raquettes TRES lourdes");
         $category2->setDescription("Ceci est une bonne description");
         $category2->setParent($category);
@@ -67,8 +67,6 @@ class AppFixtures extends Fixture
 
 
 
-
-
         $display_rack = new DisplayRack();
         $display_rack->setDescription("La turbo étagère");
         $display_rack->setPublished(True);
@@ -76,8 +74,9 @@ class AppFixtures extends Fixture
 
         foreach ($rackets as $racket) {
             $inventory->addRacket($racket);
-            $racket->addWeightCategory($category2);
+            $racket->addCategory($category);
             $display_rack->addRacket($racket);
+            $manager->persist($racket);
         }
 
 
