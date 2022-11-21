@@ -2,6 +2,9 @@ bootstrap_menu:
   menus:
     main:
       items:
+        Raquettes:
+          label: Raquettes
+          route: app_racket_index
         inventories:
           label: 'Inventories'
           route: 'list_inventories'
@@ -12,5 +15,6 @@ bootstrap_menu:
         admin:
           label: 'Admin'
           route: 'admin'
+
 
   

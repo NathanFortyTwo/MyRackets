@@ -3,10 +3,13 @@
 namespace App\Form;
 
 use App\Entity\DisplayRack;
+use App\Entity\Racket;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Repository\RacketRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
 
 class DisplayRackType extends AbstractType
 {
@@ -15,7 +18,7 @@ class DisplayRackType extends AbstractType
     {
         //dump($options);
         $display_rack = $options['data'] ?? null;
-        $member = $display_rack->getCreator();
+        $member = $display_rack->gettennisMan();
 
         $builder
             ->add('description')
@@ -23,14 +26,15 @@ class DisplayRackType extends AbstractType
             ->add('tennisMan', null, [
                 'disabled'   => true,
             ])
-            ->add('[objets]', null, [
-                'query_builder' => function (RacketRepository $er) use ($member) {
-                    return $er->createQueryBuilder('g')
-                        ->leftJoin('g.[inventaire]', 'i')
-                        ->andWhere('i.tennisMan = :member')
-                        ->setParameter('member', $member);
-                }
-            ]);
+            ->add('rackets'); //, EntityType::class, [
+        ////     'class' => Racket::class,
+        //   'query_builder' => function (RacketRepository $er) use ($member) {
+        //     return $er->createQueryBuilder('g')
+        //       ->leftJoin('g.inventory', 'i')
+        //     ->andWhere('i.tennisMan = :tennisMan')
+        //   ->setParameter('tennisMan', $member);
+        //}
+        //   ]);
     }
     public function configureOptions(OptionsResolver $resolver): void
     {
